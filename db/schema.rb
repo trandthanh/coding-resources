@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_171354) do
+ActiveRecord::Schema.define(version: 2018_12_17_175930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 2018_12_17_171354) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "favorited_type"
+    t.bigint "favorited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "completed", default: false, null: false
+    t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -40,10 +51,18 @@ ActiveRecord::Schema.define(version: 2018_12_17_171354) do
     t.index ["language_id"], name: "index_lessons_on_language_id"
   end
 
+  create_table "themes", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_topics_on_theme_id"
   end
 
   create_table "tutorials", force: :cascade do |t|
@@ -74,8 +93,10 @@ ActiveRecord::Schema.define(version: 2018_12_17_171354) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "users"
   add_foreign_key "lessons", "authors"
   add_foreign_key "lessons", "languages"
+  add_foreign_key "topics", "themes"
   add_foreign_key "tutorials", "authors"
   add_foreign_key "tutorials", "languages"
   add_foreign_key "tutorials", "topics"
