@@ -10,10 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_165756) do
+ActiveRecord::Schema.define(version: 2018_12_17_171354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "url"
+    t.string "title"
+    t.text "description"
+    t.string "level"
+    t.bigint "author_id"
+    t.bigint "language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_lessons_on_author_id"
+    t.index ["language_id"], name: "index_lessons_on_language_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tutorials", force: :cascade do |t|
+    t.string "url"
+    t.string "title"
+    t.text "description"
+    t.bigint "author_id"
+    t.bigint "language_id"
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_tutorials_on_author_id"
+    t.index ["language_id"], name: "index_tutorials_on_language_id"
+    t.index ["topic_id"], name: "index_tutorials_on_topic_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +74,9 @@ ActiveRecord::Schema.define(version: 2018_12_17_165756) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "lessons", "authors"
+  add_foreign_key "lessons", "languages"
+  add_foreign_key "tutorials", "authors"
+  add_foreign_key "tutorials", "languages"
+  add_foreign_key "tutorials", "topics"
 end
