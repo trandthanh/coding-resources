@@ -1,0 +1,17 @@
+.search-banner {
+  height: 50vh;
+  background-color: $cadet;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    color: $light-cyan;
+  }
+
+  p {
+    color: $light-cyan;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,15 @@
+<nav class="header">
+  <%= image_tag "logo.png", class: "logo" %>
+  <div class="header-right">
+    <div class="header-right-item">
+      <%= link_to new_user_registration_path do %>
+        <p>First-timer?</p>
+      <% end %>
+    </div>
+    <div class="header-right-item">
+      <%= link_to new_user_session_path do %>
+        <p>Let me log in!</p>
+      <% end %>
+    </div>
+  </div>
+</nav>
