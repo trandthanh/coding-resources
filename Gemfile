@@ -18,6 +18,7 @@ gem 'uglifier'
 gem 'webpacker'
 
 gem 'pundit'
+gem 'turbolinks'
 gem 'jquery-rails'
 
 group :development do
