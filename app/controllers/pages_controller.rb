@@ -7,22 +7,22 @@ class PagesController < ApplicationController
     @themes = Theme.all
     @topics = Topic.all
 
-    if params[:search] == "lesson"
-      @results = Lesson.where("language_id = ? AND level = ?", params[:language], params[:level])
-    end
-
-    if params[:search] == 'tutorial'
-      @results = Tutorial.where("language_id = ?", params[:tutlanguage])
-    end
-
     unless params[:search]
       @results = []
     end
-
-    # if params[:tutlanguage]
-    #   @results = Tutorial.where("language_id = ?", params[:tutlanguage])
-    # else
-    #   @results = []
-    # end
+    if params[:search] == "lesson"
+      if params[:level].blank?
+        @results = Lesson.where("language_id = ?", params[:language])
+      else
+        @results = Lesson.where("language_id = ? AND level = ?", params[:language], params[:level])
+      end
+    end
+    if params[:search] == "tutorial"
+      if params[:theme].blank?
+        @results = Tutorial.where("language_id = ?", params[:tutlanguage])
+      else
+        @results = Tutorial.where("language_id = ?", params[:tutlanguage]).joins(:topic).where("theme_id = ?", params[:theme])
+      end
+    end
   end
 end

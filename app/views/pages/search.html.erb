@@ -4,13 +4,13 @@
 </div>
 
 <div class="results">
-  <button id="button-course" class="active">
+  <button id="button-course" class="<%= 'active' if params[:search] == 'lesson' %> <%= 'inactive' if params[:search] != 'lesson' %>">
     <p>SEARCH FOR A COURSE</p>
   </button>
-  <button id="button-tutorial" class="inactive">
+  <button id="button-tutorial" class="<%= 'active' if params[:search] == 'tutorial' %> <%= 'inactive' if params[:search] != 'tutorial' %>">
     <p>SEARCH FOR A TUTORIAL</p>
   </button>
-  <div id="results-tab-lesson" class="visible">
+  <div id="results-tab-lesson" class="<%= 'visible' if params[:search] == 'lesson' %> <%= 'invisible' if params[:search] != 'lesson' %>">
     <%= form_tag(search_path, class: "", method: :get) do %>
       <%= hidden_field_tag(:search, 'lesson') %>
       <div class="results-horizontal">
@@ -26,7 +26,7 @@
       </div>
     <% end %>
   </div>
-  <div id="results-tab-tutorial" class="invisible">
+  <div id="results-tab-tutorial" class="<%= 'visible' if params[:search] == 'tutorial' %> <%= 'invisible' if params[:search] != 'tutorial' %>">
     <%= form_tag(search_path, class: "", method: :get) do %>
       <%= hidden_field_tag(:search, 'tutorial') %>
       <div class="results-horizontal">
@@ -35,9 +35,6 @@
         </div>
         <div class="results-horizontal-half">
           <%= select_tag :theme, options_from_collection_for_select(@themes, "id", "title"), prompt: "Theme" %>
-        </div>
-        <div class="results-horizontal-half">
-          <%= select_tag :topic, options_from_collection_for_select(@topics, "id", "title"), prompt: "Topic" %>
         </div>
         <%= button_tag(type: "submit", class: "search-icon") do %>
           <i class="fab fa-searchengin"></i>
