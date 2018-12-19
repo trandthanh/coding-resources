@@ -13,15 +13,27 @@ class PagesController < ApplicationController
     if params[:search] == "lesson"
       if params[:level].blank?
         @results = Lesson.where("language_id = ?", params[:language])
+        respond_to do |format|
+          format.js { render partial: 'search-results'}
+        end
       else
         @results = Lesson.where("language_id = ? AND level = ?", params[:language], params[:level])
+        respond_to do |format|
+          format.js { render partial: 'search-results'}
+        end
       end
     end
     if params[:search] == "tutorial"
       if params[:theme].blank?
         @results = Tutorial.where("language_id = ?", params[:tutlanguage])
+        respond_to do |format|
+          format.js { render partial: 'search-results'}
+        end
       else
         @results = Tutorial.where("language_id = ?", params[:tutlanguage]).joins(:topic).where("theme_id = ?", params[:theme])
+        respond_to do |format|
+          format.js { render partial: 'search-results'}
+        end
       end
     end
   end
