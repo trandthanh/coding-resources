@@ -4,9 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :favorites
-  has_many :favorite_lessons, through: :favorites, source: :favorited, source_type: 'Lesson'
-  has_many :favorite_tutorials, through: :favorites, source: :favorited, source_type: 'Tutorial'
+  has_many :favorite_lessons
+  has_many :favorites, through: :favorite_lessons, source: :lesson
 
   validates :username, presence: true, uniqueness: true
 end

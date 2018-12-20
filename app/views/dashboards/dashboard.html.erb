@@ -1,0 +1,9 @@
+<h1>Hello</h1> <%= current_user.username %>
+
+<% if @favorites.nil? %>
+  <p>No favorites yet</p>
+<% else %>
+  <% @favorites.each do |f| %>
+    <%= f.lesson.title %>
+  <% end %>
+<% end %>

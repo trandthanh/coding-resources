@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   get '/search', to: 'pages#search'
   post '/search', to: 'pages#search'
 
+  resources :lessons do
+    put :favorite, on: :member
+  end
+
+  get '/dashboard', to: 'dashboards#dashboard'
 end
