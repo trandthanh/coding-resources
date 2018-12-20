@@ -1,15 +1,29 @@
 <nav class="header">
   <%= image_tag "logo.png", class: "logo" %>
+
   <div class="header-right">
-    <div class="header-right-item">
-      <%= link_to new_user_registration_path do %>
-        <p>First-timer?</p>
-      <% end %>
-    </div>
-    <div class="header-right-item">
-      <%= link_to new_user_session_path do %>
-        <p>Let me log in!</p>
-      <% end %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="header-right-item">
+        <%= link_to favorites_path do %>
+          <p>My favorites</p>
+        <% end %>
+      </div>
+      <div class="header-right-item">
+      <%= link_to destroy_user_session_path, method: :delete do %>
+          <p>Log me out!</p>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="header-right-item">
+        <%= link_to new_user_registration_path do %>
+          <p>First-timer?</p>
+        <% end %>
+      </div>
+      <div class="header-right-item">
+        <%= link_to new_user_session_path do %>
+          <p>Let me log in!</p>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </nav>
