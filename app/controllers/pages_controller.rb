@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:search]
+  before_action :set_lesson
 
   def search
     @languages = Language.all
@@ -36,5 +37,20 @@ class PagesController < ApplicationController
         end
       end
     end
+
+    if params[:search] == "lesson"
+      if Favorite.create(favorited: @lesson, user: current_user)
+        redirect_to root_path, notice: 'Lesson has been favorited'
+      else
+        redirect_to root_path, alert: 'Something went wrong...*sad panda*'
+      end
+    end
+
+  end
+
+  private
+
+  def set_lesson
+    @lesson = Lesson.find(params[:lesson_id] || params[:id])
   end
 end

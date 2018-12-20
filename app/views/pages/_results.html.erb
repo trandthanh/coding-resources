@@ -9,7 +9,15 @@
       <p class="card-description">Description of the course</p>
     </div>
     <div class="result-card-item result-card-icons">
-      <i class="fas fa-bolt"></i>
+      <% if params[:search == lesson] %>
+        <% unless current_user.favorite_lessons.exists?(id: r.id) %>
+          <%= link_to favorite_lessons_path(lesson_id: r.id), method: :post do %>
+            <i class="fas fa-bolt"></i>
+          <% end %>
+        <% else %>
+          <p>Already favorited</p>
+        <% end %>
+      <% end %>
     </div>
    </div>
 <% end %>

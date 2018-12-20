@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   post '/search', to: 'pages#search'
 
   resources :favorites, only: [:index]
+
+  resources :favorite_lessons, only: [:create, :destroy]
+  resources :favorite_tutorials, only: [:create, :destroy]
+
 end

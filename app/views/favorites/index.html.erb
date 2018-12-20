@@ -1,2 +1,10 @@
 <p>Hello</p>
 <%= current_user.username %>
+
+
+
+<h1>My favorite lessons</h1>
+
+<% @current_user_favlessons.each do |cufl| %>
+  <%= cufl.title %>
+<% end %>
