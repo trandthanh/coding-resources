@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_lessons, through: :favorites, source: :favorited, source_type: 'Lesson'
   has_many :favorite_tutorials, through: :favorites, source: :favorited, source_type: 'Tutorial'
+
+  validates :username, presence: true, uniqueness: true
 end
