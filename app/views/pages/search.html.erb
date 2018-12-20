@@ -1,49 +1,50 @@
-<div class="search-banner">
-  <h1>Coding Resources</h1>
-  <p>Keep learning. Boost your coding skills.</p>
-</div>
-
-<div class="results">
-  <button id="button-course" class="<%= 'active' if params[:search] == 'lesson' %> <%= 'inactive' if params[:search] != 'lesson' %>">
-    <p>SEARCH FOR A COURSE</p>
-  </button>
-  <button id="button-tutorial" class="<%= 'active' if params[:search] == 'tutorial' %> <%= 'inactive' if params[:search] != 'tutorial' %>">
-    <p>SEARCH FOR A TUTORIAL</p>
-  </button>
-  <div id="results-tab-lesson" class="<%= 'visible' if params[:search] == 'lesson' %> <%= 'invisible' if params[:search] != 'lesson' %>">
-    <%= form_tag(search_path, method: :get, remote: true) do %>
-      <%= hidden_field_tag(:search, 'lesson') %>
-      <div class="results-horizontal">
-        <div class="results-horizontal-half">
-          <%= select_tag :language, options_from_collection_for_select(@languages, "id", "name"), prompt: "Programming Language" %>
-        </div>
-        <div class="results-horizontal-half">
-          <%= select_tag :level, options_for_select(@levels), prompt: "Coding Experience" %>
-        </div>
-        <%= button_tag(type: "submit", class: "search-icon") do %>
-          <i class="fab fa-searchengin"></i>
-        <% end %>
-      </div>
-    <% end %>
+<div class="body-padding">
+  <div class="search-banner">
+    <h1>Coding Resources</h1>
+    <p>Keep learning. Boost your coding skills.</p>
   </div>
-  <div id="results-tab-tutorial" class="<%= 'visible' if params[:search] == 'tutorial' %> <%= 'invisible' if params[:search] != 'tutorial' %>">
-    <%= form_tag(search_path, method: :get, remote: true) do %>
-      <%= hidden_field_tag(:search, 'tutorial') %>
-      <div class="results-horizontal">
-        <div class="results-horizontal-half">
-          <%= select_tag :tutlanguage, options_from_collection_for_select(@languages, "id", "name"), prompt: "Programming Language" %>
+
+  <div class="results">
+    <button id="button-course" class="<%= 'active' if params[:search] == 'lesson' %> <%= 'inactive' if params[:search] != 'lesson' %>">
+      <p>SEARCH FOR A COURSE</p>
+    </button>
+    <button id="button-tutorial" class="<%= 'active' if params[:search] == 'tutorial' %> <%= 'inactive' if params[:search] != 'tutorial' %>">
+      <p>SEARCH FOR A TUTORIAL</p>
+    </button>
+    <div id="results-tab-lesson" class="<%= 'visible' if params[:search] == 'lesson' %> <%= 'invisible' if params[:search] != 'lesson' %>">
+      <%= form_tag(search_path, method: :get, remote: true) do %>
+        <%= hidden_field_tag(:search, 'lesson') %>
+        <div class="results-horizontal">
+          <div class="results-horizontal-half">
+            <%= select_tag :language, options_from_collection_for_select(@languages, "id", "name"), prompt: "Programming Language" %>
+          </div>
+          <div class="results-horizontal-half">
+            <%= select_tag :level, options_for_select(@levels), prompt: "Coding Experience" %>
+          </div>
+          <%= button_tag(type: "submit", class: "search-icon") do %>
+            <i class="fab fa-searchengin"></i>
+          <% end %>
         </div>
-        <div class="results-horizontal-half">
-          <%= select_tag :theme, options_from_collection_for_select(@themes, "id", "title"), prompt: "Theme" %>
+      <% end %>
+    </div>
+    <div id="results-tab-tutorial" class="<%= 'visible' if params[:search] == 'tutorial' %> <%= 'invisible' if params[:search] != 'tutorial' %>">
+      <%= form_tag(search_path, method: :get, remote: true) do %>
+        <%= hidden_field_tag(:search, 'tutorial') %>
+        <div class="results-horizontal">
+          <div class="results-horizontal-half">
+            <%= select_tag :tutlanguage, options_from_collection_for_select(@languages, "id", "name"), prompt: "Programming Language" %>
+          </div>
+          <div class="results-horizontal-half">
+            <%= select_tag :theme, options_from_collection_for_select(@themes, "id", "title"), prompt: "Theme" %>
+          </div>
+          <%= button_tag(type: "submit", class: "search-icon") do %>
+            <i class="fab fa-searchengin"></i>
+          <% end %>
         </div>
-        <%= button_tag(type: "submit", class: "search-icon") do %>
-          <i class="fab fa-searchengin"></i>
-        <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
-
 
 
 <div id="search-results">

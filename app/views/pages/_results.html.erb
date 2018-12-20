@@ -1,6 +1,16 @@
-
-  <% @results.each do |r| %>
-     <%= r.title %>
-   <hr>
-  <% end %>
+<% @results.each do |r| %>
+   <div class="result-card">
+    <div class="result-card-item result-card-votes">
+      <i class="fas fa-chevron-up"></i>
+      <p>10</p>
+    </div>
+    <div class="result-card-item result-card-body">
+      <p class="card-title"><%= r.title %></p>
+      <p class="card-description">Description of the course</p>
+    </div>
+    <div class="result-card-item result-card-icons">
+      <i class="fas fa-bolt"></i>
+    </div>
+   </div>
+<% end %>
 
