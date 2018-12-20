@@ -1,0 +1,20 @@
+.footer-cr {
+  background-color: $deep-space-sparkle;
+  height: 10vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer-cr-right {
+  margin-right: 20px;
+  p {
+    margin: 0;
+    color: $water-spout;
+    font-weight: 300;
+    i {
+      margin: 0 5px;
+    }
+  }
+}
