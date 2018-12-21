@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_073931) do
+ActiveRecord::Schema.define(version: 2018_12_21_114847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_073931) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "lesson_id"
+    t.boolean "completed", default: false, null: false
   end
 
   create_table "favorite_tutorials", force: :cascade do |t|
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_12_21_073931) do
     t.bigint "tutorial_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed", default: false, null: false
     t.index ["tutorial_id"], name: "index_favorite_tutorials_on_tutorial_id"
     t.index ["user_id"], name: "index_favorite_tutorials_on_user_id"
   end

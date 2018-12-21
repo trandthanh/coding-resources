@@ -12,4 +12,8 @@ class DashboardPolicy < ApplicationPolicy
       scope
     end
   end
+
+  def destroy?
+    record.user == user
+  end
 end

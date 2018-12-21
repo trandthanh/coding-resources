@@ -4,58 +4,126 @@
   </div>
 
   <div class="dashboard-lower">
-    <div class="dashboard-lower-item">
-      <p class="dashboard-subtitle">Favorite Lessons</p>
-      <% if @favorite_lessons.empty? %>
-        <div class="dashboard-card-width">
-          <p>No favorites yet</p>
-        </div>
-      <% else %>
-        <% @favorite_lessons.each do |f| %>
-          <div class="dashboard-card">
-            <div class="dashboard-card-upper">
-              <div class="dashboard-card-icon">
-                <%= render "shared/icons", object: f.lesson.language.name %>
-              </div>
-              <div class="dashboard-card-body">
-                <%= f.lesson.title %>
-              </div>
-            </div>
-            <div class="dashboard-card-actions">
-              <%= link_to favorite_lesson_path(f.lesson.id, type: "unfavorite"), method: :put do %>
-                <p class="card-action">unfavorite</p>
-              <% end %>
-            </div>
+    <div class="dashboard-left">
+      <div class="dashboard-lower-item">
+        <p class="dashboard-subtitle">Favorite Lessons</p>
+        <% if @favorite_lessons.empty? %>
+          <div class="dashboard-card-width">
+            <p>No favorites yet</p>
           </div>
+        <% else %>
+          <% @favorite_lessons.each do |f| %>
+            <div class="dashboard-card">
+              <div class="dashboard-card-upper">
+                <div class="dashboard-card-icon">
+                  <%= render "shared/icons", object: f.lesson.language.name %>
+                </div>
+                <div class="dashboard-card-body">
+                  <%= f.lesson.title %>
+                </div>
+              </div>
+              <div class="dashboard-card-actions">
+                <%= link_to favorite_lesson_path(f.lesson.id, type: "unfavorite"), method: :put do %>
+                  <p class="card-action">unfavorite</p>
+                <% end %>
+                <%= link_to complete_favorite_lesson_path(f), method: :patch do %>
+                  <p class="card-action">completed</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div class="dashboard-lower-item">
+        <p class="dashboard-subtitle">Completed Lessons</p>
+        <% if @completed_lessons.empty? %>
+          <div class="dashboard-card-width">
+            <p>No completed lessons yet</p>
+          </div>
+        <% else %>
+          <% @completed_lessons.each do |c| %>
+            <div class="dashboard-card">
+              <div class="dashboard-card-upper">
+                <div class="dashboard-card-icon">
+                  <%= render "shared/icons", object: c.lesson.language.name %>
+                </div>
+                <div class="dashboard-card-body">
+                  <%= c.lesson.title %>
+                </div>
+              </div>
+              <div class="dashboard-card-actions">
+                <%= link_to complete_favorite_lesson_path(c), method: :patch do %>
+                  <p class="card-action">uncomplete</p>
+                <% end %>
+                <%= link_to delete_favorite_lesson_path(c), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <p class="card-action">delete</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-    <div class="dashboard-lower-item">
-      <p class="dashboard-subtitle">Favorite Tutorials</p>
-      <% if @favorite_tutorials.empty? %>
-        <p>No favorites yet</p>
-      <% else %>
-        <% @favorite_tutorials.each do |f| %>
-          <div class="dashboard-card">
-            <div class="dashboard-card-tag">
-              <p class="card-tag"><%= f.tutorial.topic.theme.title %> / <%= f.tutorial.topic.title %></p>
-            </div>
-            <div class="dashboard-card-upper">
-              <div class="dashboard-card-icon">
-                <%= render "shared/icons", object: f.tutorial.language.name %>
+    <div class="dashboard-right">
+      <div class="dashboard-lower-item">
+        <p class="dashboard-subtitle">Favorite Tutorials</p>
+        <% if @favorite_tutorials.empty? %>
+          <p>No favorites yet</p>
+        <% else %>
+          <% @favorite_tutorials.each do |f| %>
+            <div class="dashboard-card">
+              <div class="dashboard-card-tag">
+                <p class="card-tag"><%= f.tutorial.topic.theme.title %> / <%= f.tutorial.topic.title %></p>
               </div>
-              <div class="dashboard-card-body">
-                <p><%= f.tutorial.title %></p>
+              <div class="dashboard-card-upper">
+                <div class="dashboard-card-icon">
+                  <%= render "shared/icons", object: f.tutorial.language.name %>
+                </div>
+                <div class="dashboard-card-body">
+                  <p><%= f.tutorial.title %></p>
+                </div>
+              </div>
+              <div class="dashboard-card-actions">
+                <%= link_to favorite_tutorial_path(f.tutorial.id, type: "unfavorite"), method: :put do %>
+                  <p class="card-action">unfavorite</p>
+                <% end %>
+                <%= link_to complete_favorite_tutorial_path(f), method: :patch do %>
+                  <p class="card-action">completed</p>
+                <% end %>
               </div>
             </div>
-            <div class="dashboard-card-actions">
-              <%= link_to favorite_tutorial_path(f.tutorial.id, type: "unfavorite"), method: :put do %>
-                <p class="card-action">unfavorite</p>
-              <% end %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div class="dashboard-lower-item">
+        <p class="dashboard-subtitle">Completed Tutorials</p>
+        <% if @completed_tutorials.empty? %>
+          <div class="dashboard-card-width">
+            <p>No completed tutorials yet</p>
+          </div>
+        <% else %>
+          <% @completed_tutorials.each do |c| %>
+            <div class="dashboard-card">
+              <div class="dashboard-card-upper">
+                <div class="dashboard-card-icon">
+                  <%= render "shared/icons", object: c.tutorial.language.name %>
+                </div>
+                <div class="dashboard-card-body">
+                  <%= c.tutorial.title %>
+                </div>
+              </div>
+              <div class="dashboard-card-actions">
+                <%= link_to complete_favorite_tutorial_path(c), method: :patch do %>
+                  <p class="card-action">uncomplete</p>
+                <% end %>
+                <%= link_to delete_favorite_tutorial_path(c), method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <p class="card-action">delete</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

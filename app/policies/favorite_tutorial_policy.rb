@@ -8,4 +8,16 @@ class FavoriteTutorialPolicy < ApplicationPolicy
   def dashboard?
     true
   end
+
+  def favorite?
+    true
+  end
+
+  def complete?
+    true
+  end
+
+  def destroy?
+    record.user == user
+  end
 end
