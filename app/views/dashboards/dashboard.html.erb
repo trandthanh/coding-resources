@@ -1,6 +1,6 @@
 <div class="dashboard">
   <div class="dashboard-upper">
-    <h1>Hello <span><%= current_user.username %></span></h1>
+    <h1>Hello <span><%= current_user.username %></span>,</h1>
   </div>
 
   <div class="dashboard-lower">
@@ -35,12 +35,15 @@
       <% else %>
         <% @favorite_tutorials.each do |f| %>
           <div class="dashboard-card">
+            <div class="dashboard-card-tag">
+              <p class="card-tag"><%= f.tutorial.topic.theme.title %> / <%= f.tutorial.topic.title %></p>
+            </div>
             <div class="dashboard-card-upper">
               <div class="dashboard-card-icon">
                 <%= render "shared/icons", object: f.tutorial.language.name %>
               </div>
               <div class="dashboard-card-body">
-                <%= f.tutorial.title %>
+                <p><%= f.tutorial.title %></p>
               </div>
             </div>
             <div class="dashboard-card-actions">
