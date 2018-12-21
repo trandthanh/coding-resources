@@ -7,7 +7,11 @@ class TutorialsController < ApplicationController
     type = params[:type]
     if type == "favorite"
       current_user.favorited << @tutorial
-      redirect_to dashboard_path, notice: 'Added to favorites'
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
+      # redirect_to dashboard_path, notice: 'Added to favorites'
     elsif type == "unfavorite"
       current_user.favorited.delete(@tutorial)
       redirect_to dashboard_path, notice: 'Removed from favorites'

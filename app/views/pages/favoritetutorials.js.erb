@@ -1,0 +1,6 @@
+function refreshAdd() {
+  let fav = document.getElementById('result-tutorial');
+  fav.innerHTML = "<%= j render 'tutorials/favorite', tutorial: @tutorial %>";
+}
+
+refreshAdd();

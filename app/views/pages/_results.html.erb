@@ -11,22 +11,27 @@
     <div class="result-card-item result-card-icons">
       <% if params[:search] == "lesson" %>
         <% unless FavoriteLesson.find_by(user: current_user, lesson: r).present? %>
-          <%= link_to favorite_lesson_path(r.id, type: "favorite"), method: :put do %>
+          <%= link_to favorite_lesson_path(r.id, type: "favorite"), method: :put, remote: true do %>
             <i class="fas fa-bolt"></i>
           <% end %>
         <% else %>
-          <%= link_to "unfavorite", favorite_lesson_path(r.id, type: "unfavorite"), method: :put %>
+          <%= link_to "unfavorite", favorite_lesson_path(r.id, type: "unfavorite"), method: :put, remote: true %>
         <% end %>
       <% end %>
-      <% if params[:search] == "tutorial" %>
-        <% unless FavoriteTutorial.find_by(user: current_user, tutorial: r).present? %>
-          <%= link_to favorite_tutorial_path(r.id, type: "favorite"), method: :put do %>
-            <i class="fas fa-bolt"></i>
+      <div id="result-tutorial">
+
+        <% if params[:search] == "tutorial" %>
+          <% unless FavoriteTutorial.find_by(user: current_user, tutorial: r).present? %>
+            <%= link_to favorite_tutorial_path(r.id, type: "favorite"), method: :put, remote: true do %>
+              <i class="fas fa-bolt"></i>
+            <% end %>
+          <% else %>
+            <%= link_to "unfavorite", favorite_tutorial_path(r.id, type: "unfavorite"), method: :put, remote: true %>
           <% end %>
-        <% else %>
-          <%= link_to "unfavorite", favorite_tutorial_path(r.id, type: "unfavorite"), method: :put %>
         <% end %>
-      <% end %>
+
+      </div>
+      <div id="test"></div>
     </div>
    </div>
 <% end %>
