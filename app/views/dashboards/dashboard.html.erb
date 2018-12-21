@@ -6,8 +6,10 @@
   <div class="dashboard-lower">
     <div class="dashboard-lower-item">
       <p class="dashboard-subtitle">Favorite Lessons</p>
-      <% if @favorite_lessons.nil? %>
-        <p>No favorites yet</p>
+      <% if @favorite_lessons.empty? %>
+        <div class="dashboard-card-width">
+          <p>No favorites yet</p>
+        </div>
       <% else %>
         <% @favorite_lessons.each do |f| %>
           <div class="dashboard-card">
@@ -30,7 +32,7 @@
     </div>
     <div class="dashboard-lower-item">
       <p class="dashboard-subtitle">Favorite Tutorials</p>
-      <% if @favorite_tutorials.nil? %>
+      <% if @favorite_tutorials.empty? %>
         <p>No favorites yet</p>
       <% else %>
         <% @favorite_tutorials.each do |f| %>
