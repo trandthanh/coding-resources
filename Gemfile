@@ -21,6 +21,8 @@ gem 'pundit'
 gem 'turbolinks'
 gem 'jquery-rails'
 
+gem 'rails_admin'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
