@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     put :favorite, on: :member
   end
 
+  resources :tutorials do
+    put :favorite, on: :member
+  end
+
   get '/dashboard', to: 'dashboards#dashboard'
 end

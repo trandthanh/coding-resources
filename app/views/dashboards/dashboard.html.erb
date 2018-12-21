@@ -30,7 +30,27 @@
     </div>
     <div class="dashboard-lower-item">
       <p class="dashboard-subtitle">Favorite Tutorials</p>
-      <p>No favorites yet</p>
+      <% if @favorite_tutorials.nil? %>
+        <p>No favorites yet</p>
+      <% else %>
+        <% @favorite_tutorials.each do |f| %>
+          <div class="dashboard-card">
+            <div class="dashboard-card-upper">
+              <div class="dashboard-card-icon">
+                <%= render "shared/icons", object: f.tutorial.language.name %>
+              </div>
+              <div class="dashboard-card-body">
+                <%= f.tutorial.title %>
+              </div>
+            </div>
+            <div class="dashboard-card-actions">
+              <%= link_to favorite_tutorial_path(f.tutorial.id, type: "unfavorite"), method: :put do %>
+                <p class="card-action">unfavorite</p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>

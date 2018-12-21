@@ -18,6 +18,15 @@
           <%= link_to "unfavorite", favorite_lesson_path(r.id, type: "unfavorite"), method: :put %>
         <% end %>
       <% end %>
+      <% if params[:search] == "tutorial" %>
+        <% unless FavoriteTutorial.find_by(user: current_user, tutorial: r).present? %>
+          <%= link_to favorite_tutorial_path(r.id, type: "favorite"), method: :put do %>
+            <i class="fas fa-bolt"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "unfavorite", favorite_tutorial_path(r.id, type: "unfavorite"), method: :put %>
+        <% end %>
+      <% end %>
     </div>
    </div>
 <% end %>
