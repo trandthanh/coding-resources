@@ -9,12 +9,14 @@
       <p class="card-description">Description of the course</p>
     </div>
     <div class="result-card-item result-card-icons">
-      <% unless FavoriteLesson.find_by(user: current_user, lesson: r).present? %>
-        <%= link_to favorite_lesson_path(r.id, type: "favorite"), method: :put do %>
-          <i class="fas fa-bolt"></i>
+      <% if params[:search] == "lesson" %>
+        <% unless FavoriteLesson.find_by(user: current_user, lesson: r).present? %>
+          <%= link_to favorite_lesson_path(r.id, type: "favorite"), method: :put do %>
+            <i class="fas fa-bolt"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "unfavorite", favorite_lesson_path(r.id, type: "unfavorite"), method: :put %>
         <% end %>
-      <% else %>
-        <%= link_to "unfavorite", favorite_lesson_path(r.id, type: "unfavorite"), method: :put %>
       <% end %>
     </div>
    </div>

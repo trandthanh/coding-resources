@@ -1,0 +1,63 @@
+.dashboard {
+  height: 80vh;
+  background-color: white;
+}
+
+.dashboard-upper {
+  padding-top: 40px;
+  padding-left: 40px;
+  h1 {
+    font-family: "Source Sans Pro";
+  }
+  span {
+    font-family: "Major Mono Display";
+    color: $pewter-blue;
+  }
+}
+
+.dashboard-lower {
+  padding-top: 50px;
+  display: flex;
+}
+
+.dashboard-lower-item {
+  padding: 0 50px;
+}
+
+.dashboard-subtitle {
+  color: $gray-blue;
+  font-weight: 300;
+  padding-bottom: 30px;
+}
+
+.dashboard-card {
+  box-shadow: 0 15px 35px rgba(126,87,88,.1), 0 5px 15px rgba(0,0,0,.07);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card-body {
+  padding: 0 15px;
+}
+
+.dashboard-card-upper {
+  padding-bottom: 20px;
+  display: flex;
+  border-bottom: 0.5px solid $gray-blue;
+}
+
+.dashboard-card-actions {
+  padding-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  p {
+    margin: 0;
+  }
+}
+
+.card-action {
+  font-size: 15px;
+  color: $gray-blue;
+  padding-right: 20px;
+}
