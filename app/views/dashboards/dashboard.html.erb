@@ -1,9 +1,36 @@
-<h1>Hello</h1> <%= current_user.username %>
+<div class="dashboard">
+  <div class="dashboard-upper">
+    <h1>Hello <span><%= current_user.username %></span></h1>
+  </div>
 
-<% if @favorites.nil? %>
-  <p>No favorites yet</p>
-<% else %>
-  <% @favorites.each do |f| %>
-    <%= f.lesson.title %>
-  <% end %>
-<% end %>
+  <div class="dashboard-lower">
+    <div class="dashboard-lower-item">
+      <p class="dashboard-subtitle">Favorite Lessons</p>
+      <% if @favorite_lessons.nil? %>
+        <p>No favorites yet</p>
+      <% else %>
+        <% @favorite_lessons.each do |f| %>
+          <div class="dashboard-card">
+            <div class="dashboard-card-upper">
+              <div class="dashboard-card-icon">
+                <%= render "shared/icons", object: f.lesson.language.name %>
+              </div>
+              <div class="dashboard-card-body">
+                <%= f.lesson.title %>
+              </div>
+            </div>
+            <div class="dashboard-card-actions">
+              <%= link_to favorite_lesson_path(f.lesson.id, type: "unfavorite"), method: :put do %>
+                <p class="card-action">unfavorite</p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="dashboard-lower-item">
+      <p class="dashboard-subtitle">Favorite Tutorials</p>
+      <p>No favorites yet</p>
+    </div>
+  </div>
+</div>
